@@ -1,0 +1,30 @@
+@model LoginUser
+<style>
+    label
+    {min-width: 100px;}
+</style>
+<h1>Login</h1>
+<form action="Login" method="post">
+
+    <div style="margin-bottom: 5px;">
+        <label for="username">Username</label>
+        <input type="text" name="username" value="@Model.UserName"/>
+    </div>
+
+    <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" value="@Model.Password"/>
+    </div>
+    <div style="font-weight: 90%; color: red; padding-left: 15px;">
+        @foreach(var modelState in ViewData.ModelState.Values)
+        {
+            foreach(var error in modelState.Errors)
+            {
+                <div>* @error.ErrorMessage</div>
+            }
+        }
+    </div>
+    <div>
+        <button type="submit">Login</button>
+    </div>
+</form>
