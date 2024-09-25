@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "basicauthentication", "basi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cookieauth", "cookieauth\cookieauth.csproj", "{138E42CF-1481-480D-A0BF-EFB7B9666EF5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jwtauth", "jwtauth\jwtauth.csproj", "{B98CC781-1379-4E8A-A3C0-D406A841171A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{138E42CF-1481-480D-A0BF-EFB7B9666EF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{138E42CF-1481-480D-A0BF-EFB7B9666EF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{138E42CF-1481-480D-A0BF-EFB7B9666EF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B98CC781-1379-4E8A-A3C0-D406A841171A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B98CC781-1379-4E8A-A3C0-D406A841171A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B98CC781-1379-4E8A-A3C0-D406A841171A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B98CC781-1379-4E8A-A3C0-D406A841171A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
