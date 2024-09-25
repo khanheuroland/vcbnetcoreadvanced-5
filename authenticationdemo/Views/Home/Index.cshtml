@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@inject IHttpContextAccessor accessor;
+
+<div class="text-center">
+    <h1 class="display-4">Welcome @accessor.HttpContext.User.Claims.FirstOrDefault().Value</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
