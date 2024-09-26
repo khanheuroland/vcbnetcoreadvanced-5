@@ -7,6 +7,7 @@ namespace cookieauth.Controllers;
 
 public class HomeController : Controller
 {
+
     private readonly ILogger<HomeController> _logger;
 
     public HomeController(ILogger<HomeController> logger)
@@ -14,10 +15,10 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    [Authorize]
+    
     public IActionResult Index()
     {
-        return View();
+        return Content("hello");
     }
 
     public IActionResult Privacy()

@@ -50,6 +50,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseCookiePolicy();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(

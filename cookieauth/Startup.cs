@@ -2,21 +2,39 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using cookieauth.Data;
+using cookieauth.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace cookieauth
 {
     public class Startup
     {
         private IServiceCollection services;
-
-        public Startup(IServiceCollection _services)
+        private ConfigurationManager config;
+        public Startup(IServiceCollection _services, ConfigurationManager configuration)
         {
             this.services = _services;
+            this.config = configuration;
         }
 
         public void ConfigureServices()
         {
+            services.AddDbContext<AppIdentityDbContext>(option=>{
+                option.UseSqlServer(this.config.GetConnectionString("AppIdentity"));
+            });
+
+            services.AddIdentity<AppUser, IdentityRole>(options=>{
+                options.Lockout.AllowedForNewUsers = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 3;
+            })
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
+
             this.services.AddControllersWithViews();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -31,6 +49,10 @@ namespace cookieauth
                     Path = "/",
                     SecurePolicy = CookieSecurePolicy.SameAsRequest
                 };
+            });
+
+            services.AddAuthorization(options=>{
+                options.AddPolicy("AdminOnly", policy=> policy.RequireClaim("Admin"));
             });
             
         }
