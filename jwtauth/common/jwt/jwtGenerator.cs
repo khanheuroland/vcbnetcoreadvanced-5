@@ -38,6 +38,21 @@ namespace jwtauth.common.jwt
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        public String generateJwtRefreshToken(AuthenticationUser user)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
+            var credential = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(configuration["Jwt:Issuer"],
+                configuration["Jwt:Issuer"],
+                GenerateClaims(user),
+                expires: DateTime.Now.AddDays(7),
+                signingCredentials: credential
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
         private List<Claim> GenerateClaims(AuthenticationUser user)
         {
             var claims = new List<Claim>();

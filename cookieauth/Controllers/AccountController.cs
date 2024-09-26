@@ -91,6 +91,21 @@ namespace cookieauth.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+        [HttpGet]
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(String email)
+        {
+            var user = await _userManager.FindByNameAsync(email);
+
+            var code = _userManager.GeneratePasswordResetTokenAsync(user);
+
+            return Content(code.Result);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
